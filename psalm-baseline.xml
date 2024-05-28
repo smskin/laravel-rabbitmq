@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+  <file src="src/Commands/SupervisorCommand.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Commands/WorkerCommand.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[handle]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Configuration.php">
+    <InaccessibleProperty>
+      <code><![CDATA[$this->consumers]]></code>
+      <code><![CDATA[$this->exchanges]]></code>
+      <code><![CDATA[$this->queues]]></code>
+    </InaccessibleProperty>
+    <MissingTemplateParam>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/ConfigurationResolver.php">
+    <MissingTemplateParam>
+      <code><![CDATA[$exchange->getBindings()->each(function (Binding $binding) use ($channel, $exchanges, $exchange) {
+                $this->declareExchangeBind($channel, $exchanges, $exchange, $binding);
+            })]]></code>
+      <code><![CDATA[$queue->getBindings()->each(function (Binding $binding) use ($channel, $exchanges, $queue) {
+                $this->declareQueueBind($channel, $exchanges, $queue, $binding);
+            })]]></code>
+      <code><![CDATA[Collection<Exchange>]]></code>
+      <code><![CDATA[Collection<Exchange>]]></code>
+      <code><![CDATA[Collection<Queue>]]></code>
+      <code><![CDATA[Collection<Queue>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[declare]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Contracts/IShardingStrategy.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Entities/Consumer.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getArguments]]></code>
+      <code><![CDATA[getTicket]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Entities/Exchange.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Binding>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Entities/Queue.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Binding>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Examples/Consumers/TestConsumer1.php">
+    <UnusedClass>
+      <code><![CDATA[TestConsumer1]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/Consumers/TestConsumer2.php">
+    <UnusedClass>
+      <code><![CDATA[TestConsumer2]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/Consumers/TestConsumer3.php">
+    <UnusedClass>
+      <code><![CDATA[TestConsumer3]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/Queues/TestQueue4.php">
+    <UnusedClass>
+      <code><![CDATA[TestQueue4]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Providers/ServiceProvider.php">
+    <UnusedClass>
+      <code><![CDATA[ServiceProvider]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Publisher.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Message>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[batchPublish]]></code>
+      <code><![CDATA[publish]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Sharding/EveryConsumerStrategy.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Sharding/MaxLimitStrategy.php">
+    <MissingTemplateParam>
+      <code><![CDATA[$chunks->values()->get($id)]]></code>
+      <code><![CDATA[$configuration->consumers->chunk($limit)]]></code>
+      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Sharding/OneShardStrategy.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Consumer>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/ShardingController.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+  </file>
+  <file src="src/Worker.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection<Consumer>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+</files>

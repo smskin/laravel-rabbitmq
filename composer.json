@@ -1,0 +1,63 @@
+{
+    "name": "smskin/laravel-rabbitmq",
+    "description": "RabbitMQ provider for laravel projects",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "rabbitmq",
+        "amqp"
+    ],
+    "authors": [
+        {
+            "name": "Sergey Mikhailov (smskin)",
+            "email": "sms7@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-pcntl": "*",
+        "laravel/framework": "^10 || ^11",
+        "php-amqplib/php-amqplib": "^3.6",
+        "smskin/laravel-daemon-supervisor": "^1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.54",
+        "mockery/mockery": "^1.4",
+        "orchestra/testbench": "^8 || ^9",
+        "phpunit/phpunit": "^10.5",
+        "vimeo/psalm": "^5.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "SMSkin\\LaravelRabbitMq\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SMSkin\\LaravelRabbitMq\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "php-http/discovery": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "analyze": "psalm",
+        "check-style": [
+            "php-cs-fixer fix --diff --dry-run",
+            "php-cs-fixer fix --diff --dry-run --config=.php-cs-fixer.tests.php"
+        ],
+        "fix-style": [
+            "php-cs-fixer fix",
+            "php-cs-fixer fix --config=.php-cs-fixer.tests.php"
+        ],
+        "psalm-set-baseline": "psalm --set-baseline=psalm-baseline.xml",
+        "test": "phpunit"
+    }
+}
