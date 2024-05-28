@@ -47,6 +47,13 @@
         },
         "sort-packages": true
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SMSkin\\LaravelRabbitMq\\Providers\\ServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "analyze": "psalm",
         "check-style": [
