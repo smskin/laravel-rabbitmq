@@ -6,7 +6,7 @@ use ErrorException;
 use Exception;
 use Illuminate\Support\Collection;
 use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
-use SMSkin\LaravelRabbitMq\ShardingController;
+use SMSkin\LaravelRabbitMq\Contracts\IShardingController;
 use SMSkin\LaravelRabbitMq\Worker;
 use SMSkin\LaravelSupervisor\Commands\WorkerCommand as BaseCommand;
 
@@ -68,7 +68,7 @@ class WorkerCommand extends BaseCommand
      */
     private function getConsumersForShard(): Collection
     {
-        return app(ShardingController::class)->getConsumersForShard($this->argument('shardId'));
+        return app(IShardingController::class)->getConsumersForShard($this->argument('shardId'));
     }
 
     private function getWorker(): Worker

@@ -105,7 +105,7 @@ class Worker
     private function handleException(IConsumer $consumer, AMQPMessage $message, Throwable $exception): void
     {
         try {
-            app(Publisher::class)->publish(new Message(
+            $this->getPublisher()->publish(new Message(
                 new AMQPMessage(json_encode([
                     'exception' => [
                         'class' => get_class($exception),
@@ -140,5 +140,10 @@ class Worker
             } while ($this->channel->getConnection()->isBlocked());
             $this->handleException($consumer, $message, $exception);
         }
+    }
+
+    private function getPublisher(): Publisher
+    {
+        return app(Publisher::class);
     }
 }

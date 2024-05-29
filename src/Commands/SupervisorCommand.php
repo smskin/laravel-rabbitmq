@@ -3,8 +3,8 @@
 namespace SMSkin\LaravelRabbitMq\Commands;
 
 use Illuminate\Support\Collection;
+use SMSkin\LaravelRabbitMq\Contracts\IShardingController;
 use SMSkin\LaravelRabbitMq\RabbitMqConfigurationResolver;
-use SMSkin\LaravelRabbitMq\ShardingController;
 use SMSkin\LaravelSupervisor\Commands\SupervisorsCommand as BaseCommand;
 use SMSkin\LaravelSupervisor\Contracts\IWorker;
 
@@ -31,7 +31,7 @@ class SupervisorCommand extends BaseCommand
      */
     protected function getWorkers(): Collection
     {
-        return app(ShardingController::class)->getShards();
+        return app(IShardingController::class)->getShards();
     }
 
     private function getConfigResolver(): RabbitMqConfigurationResolver

@@ -8,6 +8,7 @@ use SMSkin\LaravelRabbitMq\Commands\SupervisorCommand;
 use SMSkin\LaravelRabbitMq\Commands\WorkerCommand;
 use SMSkin\LaravelRabbitMq\Configuration;
 use SMSkin\LaravelRabbitMq\Contracts\IConfiguration;
+use SMSkin\LaravelRabbitMq\Contracts\IShardingController;
 use SMSkin\LaravelRabbitMq\ShardingController;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
@@ -61,6 +62,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 Config::get('rabbitmq.queue_bindings'),
             );
         });
+
+        $this->app->bind(IShardingController::class, ShardingController::class);
 
         $this->app->singleton(ShardingController::class, static function () {
             return new ShardingController(

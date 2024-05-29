@@ -5,6 +5,7 @@ namespace SMSkin\LaravelRabbitMq;
 use Illuminate\Support\Collection;
 use SMSkin\LaravelRabbitMq\Contracts\IConfiguration;
 use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
+use SMSkin\LaravelRabbitMq\Contracts\IShardingController;
 use SMSkin\LaravelRabbitMq\Contracts\IShardingStrategy;
 use SMSkin\LaravelRabbitMq\Enums\ShardingStrategy;
 use SMSkin\LaravelRabbitMq\Sharding\EveryConsumerStrategy;
@@ -12,7 +13,7 @@ use SMSkin\LaravelRabbitMq\Sharding\MaxLimitStrategy;
 use SMSkin\LaravelRabbitMq\Sharding\OneShardStrategy;
 use SMSkin\LaravelSupervisor\Contracts\IWorker;
 
-class ShardingController
+class ShardingController implements IShardingController
 {
     public function __construct(private readonly ShardingStrategy $shardingStrategy, private readonly int|null $maxShards, private readonly IConfiguration $configuration)
     {

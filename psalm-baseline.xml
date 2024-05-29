@@ -9,6 +9,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Commands/WorkerCommand.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<IConsumer>]]></code>
+    </MissingTemplateParam>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[handle]]></code>
@@ -76,6 +79,16 @@
   <file src="src/Contracts/IQueue.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[setName]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Contracts/IShardingController.php">
+    <MissingTemplateParam>
+      <code><![CDATA[Collection<IConsumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getConsumersForShard]]></code>
+      <code><![CDATA[getShards]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Contracts/IShardingStrategy.php">
@@ -146,7 +159,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[batchPublish]]></code>
-      <code><![CDATA[publish]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/RabbitMqConfigurationResolver.php">
@@ -228,10 +240,6 @@
       <code><![CDATA[Collection<IConsumer>]]></code>
       <code><![CDATA[Collection<IWorker>]]></code>
     </MissingTemplateParam>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[getConsumersForShard]]></code>
-      <code><![CDATA[getShards]]></code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="src/Worker.php">
     <MissingTemplateParam>
@@ -240,8 +248,6 @@
     </MissingTemplateParam>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-      <code><![CDATA[start]]></code>
-      <code><![CDATA[terminate]]></code>
     </PossiblyUnusedMethod>
   </file>
 </files>
