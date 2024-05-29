@@ -2,15 +2,32 @@
 
 namespace SMSkin\LaravelRabbitMq\Entities;
 
-class Binding
+use SMSkin\LaravelRabbitMq\Contracts\IBinding;
+
+abstract class Binding implements IBinding
 {
-    /** @noinspection ParameterDefaultsNullInspection */
-    public function __construct(
-        public readonly string $exchangeClass,
-        public readonly string $routingKey = '',
-        public readonly bool $noWait = false,
-        public readonly array $arguments = [],
-        public readonly int|null $ticket = null
-    ) {
+    protected string $routingKey = '';
+    protected bool $noWait = false;
+    protected array $arguments = [];
+    protected int|null $ticket = null;
+
+    public function getRoutingKey(): string
+    {
+        return $this->routingKey;
+    }
+
+    public function isNoWait(): bool
+    {
+        return $this->noWait;
+    }
+
+    public function getArguments(): array
+    {
+        return $this->arguments;
+    }
+
+    public function getTicket(): int|null
+    {
+        return $this->ticket;
     }
 }

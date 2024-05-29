@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 trait NameTrait
 {
-    public function getName(): string
+    private function generateName(): string
     {
         return strtolower(
             Str::slug(Config::get('app.name')) . ':' . str_replace('\\', '.', static::class)

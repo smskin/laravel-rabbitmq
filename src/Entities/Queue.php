@@ -2,13 +2,14 @@
 
 namespace SMSkin\LaravelRabbitMq\Entities;
 
-use Illuminate\Support\Collection;
+use SMSkin\LaravelRabbitMq\Contracts\IQueue;
 use SMSkin\LaravelRabbitMq\Traits\NameTrait;
 
-abstract class Queue
+abstract class Queue implements IQueue
 {
     use NameTrait;
 
+    protected string $name;
     protected bool $passive = false;
     protected bool $durable = false;
     protected bool $exclusive = false;
@@ -17,12 +18,9 @@ abstract class Queue
     protected array $arguments = [];
     protected int|null $ticket = null;
 
-    /**
-     * @return Collection<Binding>
-     */
-    public function getBindings(): Collection
+    public function __construct()
     {
-        return collect();
+        $this->name = $this->generateName();
     }
 
     public function isPassive(): bool
@@ -58,5 +56,16 @@ abstract class Queue
     public function getTicket(): int|null
     {
         return $this->ticket;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

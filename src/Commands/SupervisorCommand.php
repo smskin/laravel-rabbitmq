@@ -3,7 +3,7 @@
 namespace SMSkin\LaravelRabbitMq\Commands;
 
 use Illuminate\Support\Collection;
-use SMSkin\LaravelRabbitMq\ConfigurationResolver;
+use SMSkin\LaravelRabbitMq\RabbitMqConfigurationResolver;
 use SMSkin\LaravelRabbitMq\ShardingController;
 use SMSkin\LaravelSupervisor\Commands\SupervisorsCommand as BaseCommand;
 use SMSkin\LaravelSupervisor\Contracts\IWorker;
@@ -21,7 +21,7 @@ class SupervisorCommand extends BaseCommand
 
     public function handle()
     {
-        $this->configureRabbitMq();
+        $this->getConfigResolver()->declare();
         $this->start();
     }
 
@@ -33,8 +33,8 @@ class SupervisorCommand extends BaseCommand
         return $this->shardingController->getShards();
     }
 
-    private function configureRabbitMq()
+    private function getConfigResolver(): RabbitMqConfigurationResolver
     {
-        app(ConfigurationResolver::class)->declare();
+        return app(RabbitMqConfigurationResolver::class);
     }
 }

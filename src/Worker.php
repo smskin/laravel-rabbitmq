@@ -13,7 +13,7 @@ use PhpAmqpLib\Exception\AMQPChannelClosedException;
 use PhpAmqpLib\Exception\AMQPConnectionBlockedException;
 use PhpAmqpLib\Exception\AMQPConnectionClosedException;
 use PhpAmqpLib\Message\AMQPMessage;
-use SMSkin\LaravelRabbitMq\Entities\Consumer;
+use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
 use SMSkin\LaravelRabbitMq\Entities\Message;
 use Throwable;
 
@@ -23,7 +23,7 @@ class Worker
     private bool $working;
 
     /**
-     * @var Collection<Consumer>
+     * @var Collection<IConsumer>
      */
     private Collection $consumers;
 
@@ -36,14 +36,14 @@ class Worker
     }
 
     /**
-     * @param Collection<Consumer> $consumers
+     * @param Collection<IConsumer> $consumers
      * @throws ErrorException
      */
     public function start(Collection $consumers): void
     {
         $this->working = true;
         $this->consumers = $consumers;
-        $consumers->each(function (Consumer $consumer) {
+        $consumers->each(function (IConsumer $consumer) {
             return $this->registerConsumer($consumer);
         });
 
@@ -57,20 +57,20 @@ class Worker
     {
         $this->working = false;
         sleep(1);
-        $this->consumers->each(function (Consumer $consumer) {
+        $this->consumers->each(function (IConsumer $consumer) {
             $this->stopConsumer($consumer);
         });
     }
 
-    private function stopConsumer(Consumer $consumer): void
+    private function stopConsumer(IConsumer $consumer): void
     {
         $this->channel->basic_cancel($consumer->getTag());
     }
 
-    private function registerConsumer(Consumer $consumer): string
+    private function registerConsumer(IConsumer $consumer): string
     {
         return $this->channel->basic_consume(
-            $consumer->getQueue()->getName(),
+            $consumer->getQueue(),
             $consumer->getTag(),
             $consumer->isNoLocal(),
             $consumer->isNoAck(),
@@ -102,7 +102,7 @@ class Worker
     /**
      * @throws Exception
      */
-    private function handleException(Consumer $consumer, AMQPMessage $message, Throwable $exception): void
+    private function handleException(IConsumer $consumer, AMQPMessage $message, Throwable $exception): void
     {
         try {
             app(Publisher::class)->publish(new Message(
@@ -122,14 +122,14 @@ class Worker
                         'consumerTag' => $message->getConsumerTag(),
                         'redelivered' => $message->isRedelivered(),
                         'exchange' => $message->getExchange(),
-                        'queue' => $consumer->getQueue()->getName(),
+                        'queue' => $consumer->getQueue(),
                         'routingKey' => $message->getRoutingKey(),
                         'messageCount' => $message->getMessageCount(),
                         'properties' => $message->get_properties(),
                     ],
                     'handledAt' => now()->toIso8601String(),
                 ], JSON_PRETTY_PRINT)),
-                $consumer->getQueue()->getName() . '_error'
+                $consumer->getQueue() . '_error'
             ));
         } catch (AMQPChannelClosedException|AMQPConnectionClosedException) {
             $this->channel->getConnection()->reconnect();

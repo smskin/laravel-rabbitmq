@@ -3,8 +3,9 @@
 namespace SMSkin\LaravelRabbitMq;
 
 use Illuminate\Support\Collection;
+use SMSkin\LaravelRabbitMq\Contracts\IConfiguration;
+use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
 use SMSkin\LaravelRabbitMq\Contracts\IShardingStrategy;
-use SMSkin\LaravelRabbitMq\Entities\Consumer;
 use SMSkin\LaravelRabbitMq\Enums\ShardingStrategy;
 use SMSkin\LaravelRabbitMq\Sharding\EveryConsumerStrategy;
 use SMSkin\LaravelRabbitMq\Sharding\MaxLimitStrategy;
@@ -13,7 +14,7 @@ use SMSkin\LaravelSupervisor\Contracts\IWorker;
 
 class ShardingController
 {
-    public function __construct(private readonly ShardingStrategy $shardingStrategy, private readonly int|null $maxShards, private readonly Configuration $configuration)
+    public function __construct(private readonly ShardingStrategy $shardingStrategy, private readonly int|null $maxShards, private readonly IConfiguration $configuration)
     {
     }
 
@@ -27,7 +28,7 @@ class ShardingController
 
     /**
      * @param int $id
-     * @return Collection<Consumer>
+     * @return Collection<IConsumer>
      */
     public function getConsumersForShard(int $id): Collection
     {

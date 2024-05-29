@@ -4,7 +4,6 @@ namespace SMSkin\LaravelRabbitMq\Contracts;
 
 use Illuminate\Support\Collection;
 use SMSkin\LaravelRabbitMq\Configuration;
-use SMSkin\LaravelRabbitMq\Entities\Consumer;
 use SMSkin\LaravelSupervisor\Contracts\IWorker;
 
 interface IShardingStrategy
@@ -18,7 +17,7 @@ interface IShardingStrategy
     /**
      * @param Configuration $configuration
      * @param int $id
-     * @return Collection<Consumer>
+     * @return Collection<IConsumer>
      */
     public function getConsumersForShard(Configuration $configuration, int $id): Collection;
 }

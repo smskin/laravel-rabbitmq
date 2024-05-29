@@ -4,16 +4,16 @@ namespace SMSkin\LaravelRabbitMq\Examples\Consumers;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use SMSkin\LaravelRabbitMq\Entities\Consumer;
-use SMSkin\LaravelRabbitMq\Examples\Queues\TestQueue2;
+use SMSkin\LaravelRabbitMq\Examples\Queues\Queue2;
 
-class TestConsumer2 extends Consumer
+class Consumer2 extends Consumer
 {
-    public function getQueueClass(): string
+    public function getQueue(): string
     {
-        return TestQueue2::class;
+        return (new Queue2)->getName();
     }
 
-    public function handleMessage(AMQPMessage $message)
+    public function handleMessage(AMQPMessage $message): void
     {
         echo "\n--------\n";
         echo static::class . ': ' . $message->body;

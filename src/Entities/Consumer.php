@@ -3,10 +3,11 @@
 namespace SMSkin\LaravelRabbitMq\Entities;
 
 use PhpAmqpLib\Message\AMQPMessage;
-use SMSkin\LaravelRabbitMq\Configuration;
+use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
 
-abstract class Consumer
+abstract class Consumer implements IConsumer
 {
+    protected string $tag;
     protected bool $noLocal = false;
     protected bool $noAck = false;
     protected bool $exclusive = false;
@@ -14,20 +15,16 @@ abstract class Consumer
     protected int|null $ticket = null;
     protected array $arguments = [];
 
-    abstract public function getQueueClass(): string;
-
-    public function getQueue(): Queue
+    public function __construct()
     {
-        return app(Configuration::class)->queues->filter(function (Queue $queue) {
-            return get_class($queue) === $this->getQueueClass();
-        })->firstOrFail();
+        $this->tag = md5(static::class);
     }
 
-    abstract public function handleMessage(AMQPMessage $message);
+    abstract public function handleMessage(AMQPMessage $message): void;
 
     public function getTag(): string
     {
-        return md5(static::class);
+        return $this->tag;
     }
 
     /**

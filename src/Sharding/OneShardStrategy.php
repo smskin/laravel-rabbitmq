@@ -5,8 +5,8 @@ namespace SMSkin\LaravelRabbitMq\Sharding;
 use Illuminate\Support\Collection;
 use RuntimeException;
 use SMSkin\LaravelRabbitMq\Configuration;
+use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
 use SMSkin\LaravelRabbitMq\Contracts\IShardingStrategy;
-use SMSkin\LaravelRabbitMq\Entities\Consumer;
 use SMSkin\LaravelRabbitMq\Entities\Worker;
 
 class OneShardStrategy implements IShardingStrategy
@@ -21,7 +21,7 @@ class OneShardStrategy implements IShardingStrategy
     /**
      * @param Configuration $configuration
      * @param int $id
-     * @return Collection<Consumer>
+     * @return Collection<IConsumer>
      */
     public function getConsumersForShard(Configuration $configuration, int $id): Collection
     {
