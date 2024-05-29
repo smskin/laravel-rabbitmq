@@ -17,73 +17,121 @@
   <file src="src/Configuration.php">
     <InaccessibleProperty>
       <code><![CDATA[$this->consumers]]></code>
+      <code><![CDATA[$this->consumers]]></code>
+      <code><![CDATA[$this->exchangeBindings]]></code>
+      <code><![CDATA[$this->exchangeBindings]]></code>
       <code><![CDATA[$this->exchanges]]></code>
+      <code><![CDATA[$this->exchanges]]></code>
+      <code><![CDATA[$this->queueBindings]]></code>
+      <code><![CDATA[$this->queueBindings]]></code>
+      <code><![CDATA[$this->queues]]></code>
       <code><![CDATA[$this->queues]]></code>
     </InaccessibleProperty>
     <MissingTemplateParam>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
       <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
+      <code><![CDATA[Collection]]></code>
     </MissingTemplateParam>
   </file>
-  <file src="src/ConfigurationResolver.php">
+  <file src="src/Contracts/IConfiguration.php">
     <MissingTemplateParam>
-      <code><![CDATA[$exchange->getBindings()->each(function (Binding $binding) use ($channel, $exchanges, $exchange) {
-                $this->declareExchangeBind($channel, $exchanges, $exchange, $binding);
-            })]]></code>
-      <code><![CDATA[$queue->getBindings()->each(function (Binding $binding) use ($channel, $exchanges, $queue) {
-                $this->declareQueueBind($channel, $exchanges, $queue, $binding);
-            })]]></code>
-      <code><![CDATA[Collection<Exchange>]]></code>
-      <code><![CDATA[Collection<Exchange>]]></code>
-      <code><![CDATA[Collection<Queue>]]></code>
-      <code><![CDATA[Collection<Queue>]]></code>
+      <code><![CDATA[Collection<IBinding>]]></code>
+      <code><![CDATA[Collection<IBinding>]]></code>
+      <code><![CDATA[Collection<IBinding>]]></code>
+      <code><![CDATA[Collection<IBinding>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
+      <code><![CDATA[Collection<IExchange>]]></code>
+      <code><![CDATA[Collection<IExchange>]]></code>
+      <code><![CDATA[Collection<IQueue>]]></code>
+      <code><![CDATA[Collection<IQueue>]]></code>
     </MissingTemplateParam>
     <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-      <code><![CDATA[declare]]></code>
+      <code><![CDATA[addConsumer]]></code>
+      <code><![CDATA[addExchange]]></code>
+      <code><![CDATA[addExchangeBinding]]></code>
+      <code><![CDATA[addQueue]]></code>
+      <code><![CDATA[addQueueBinding]]></code>
+      <code><![CDATA[getConsumers]]></code>
+      <code><![CDATA[setConsumers]]></code>
+      <code><![CDATA[setExchangeBindings]]></code>
+      <code><![CDATA[setExchanges]]></code>
+      <code><![CDATA[setQueueBindings]]></code>
+      <code><![CDATA[setQueues]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Contracts/IShardingStrategy.php">
-    <MissingTemplateParam>
-      <code><![CDATA[Collection<Consumer>]]></code>
-      <code><![CDATA[Collection<IWorker>]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Entities/Consumer.php">
+  <file src="src/Contracts/IConsumer.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[getArguments]]></code>
       <code><![CDATA[getTicket]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Entities/Exchange.php">
+  <file src="src/Contracts/IExchange.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setName]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Contracts/IQueue.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[setName]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Contracts/IShardingStrategy.php">
     <MissingTemplateParam>
-      <code><![CDATA[Collection<Binding>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
+      <code><![CDATA[Collection<IWorker>]]></code>
     </MissingTemplateParam>
   </file>
-  <file src="src/Entities/Queue.php">
-    <MissingTemplateParam>
-      <code><![CDATA[Collection<Binding>]]></code>
-    </MissingTemplateParam>
-  </file>
-  <file src="src/Examples/Consumers/TestConsumer1.php">
+  <file src="src/Examples/Consumers/Consumer1.php">
     <UnusedClass>
-      <code><![CDATA[TestConsumer1]]></code>
+      <code><![CDATA[Consumer1]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Examples/Consumers/TestConsumer2.php">
+  <file src="src/Examples/Consumers/Consumer2.php">
     <UnusedClass>
-      <code><![CDATA[TestConsumer2]]></code>
+      <code><![CDATA[Consumer2]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Examples/Consumers/TestConsumer3.php">
+  <file src="src/Examples/Consumers/Consumer3.php">
     <UnusedClass>
-      <code><![CDATA[TestConsumer3]]></code>
+      <code><![CDATA[Consumer3]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Examples/Queues/TestQueue4.php">
+  <file src="src/Examples/ExchangeBindings/ExchangeBinding1.php">
     <UnusedClass>
-      <code><![CDATA[TestQueue4]]></code>
+      <code><![CDATA[ExchangeBinding1]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/ExchangeBindings/ExchangeBinding2.php">
+    <UnusedClass>
+      <code><![CDATA[ExchangeBinding2]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/QueueBindings/QueueBinding1.php">
+    <UnusedClass>
+      <code><![CDATA[QueueBinding1]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/QueueBindings/QueueBinding2.php">
+    <UnusedClass>
+      <code><![CDATA[QueueBinding2]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/QueueBindings/QueueBinding3.php">
+    <UnusedClass>
+      <code><![CDATA[QueueBinding3]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/QueueBindings/QueueBinding4.php">
+    <UnusedClass>
+      <code><![CDATA[QueueBinding4]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Examples/QueueBindings/QueueBinding5.php">
+    <UnusedClass>
+      <code><![CDATA[QueueBinding5]]></code>
     </UnusedClass>
   </file>
   <file src="src/Providers/ServiceProvider.php">
@@ -101,9 +149,64 @@
       <code><![CDATA[publish]]></code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/RabbitMqConfigurationResolver.php">
+    <MissingTemplateParam>
+      <code><![CDATA[$this->configuration->getExchangeBindings()->each(function (IBinding $binding) {
+            $this->connection->channel()->exchange_bind(
+                $binding->getDestination(),
+                $binding->getSource(),
+                $binding->getRoutingKey(),
+                $binding->isNoWait(),
+                $binding->getArguments(),
+                $binding->getTicket()
+            );
+        })]]></code>
+      <code><![CDATA[$this->configuration->getExchanges()->each(function (IExchange $exchange) {
+            $this->connection->channel()->exchange_declare(
+                $exchange->getName(),
+                $exchange->getType()->value,
+                $exchange->isPassive(),
+                $exchange->isDurable(),
+                $exchange->isAutoDelete(),
+                $exchange->isInternal(),
+                $exchange->isNoWait(),
+                $exchange->getArguments(),
+                $exchange->getTicket()
+            );
+        })]]></code>
+      <code><![CDATA[$this->configuration->getQueueBindings()->each(function (IBinding $binding) {
+            $this->connection->channel()->queue_bind(
+                $binding->getDestination(),
+                $binding->getSource(),
+                $binding->getRoutingKey(),
+                $binding->isNoWait(),
+                $binding->getArguments(),
+                $binding->getTicket()
+            );
+        })]]></code>
+      <code><![CDATA[$this->configuration->getQueues()->each(function (IQueue $queue) {
+            $this->connection->channel()->queue_declare(
+                $queue->getName(),
+                $queue->isPassive(),
+                $queue->isDurable(),
+                $queue->isExclusive(),
+                $queue->isAutoDelete(),
+                $queue->isNoWait(),
+                $queue->getArguments(),
+                $queue->getTicket()
+            );
+        })]]></code>
+      <code><![CDATA[$this->configuration->getQueues()->each(function (IQueue $queue) {
+            $this->declareErrorQueue($queue);
+        })]]></code>
+    </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Sharding/EveryConsumerStrategy.php">
     <MissingTemplateParam>
-      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
       <code><![CDATA[Collection<IWorker>]]></code>
     </MissingTemplateParam>
   </file>
@@ -111,28 +214,34 @@
     <MissingTemplateParam>
       <code><![CDATA[$chunks->values()->get($id)]]></code>
       <code><![CDATA[$configuration->consumers->chunk($limit)]]></code>
-      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
       <code><![CDATA[Collection<IWorker>]]></code>
     </MissingTemplateParam>
   </file>
   <file src="src/Sharding/OneShardStrategy.php">
     <MissingTemplateParam>
-      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
     </MissingTemplateParam>
   </file>
   <file src="src/ShardingController.php">
     <MissingTemplateParam>
-      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
       <code><![CDATA[Collection<IWorker>]]></code>
     </MissingTemplateParam>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getConsumersForShard]]></code>
+      <code><![CDATA[getShards]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Worker.php">
     <MissingTemplateParam>
       <code><![CDATA[Collection]]></code>
-      <code><![CDATA[Collection<Consumer>]]></code>
+      <code><![CDATA[Collection<IConsumer>]]></code>
     </MissingTemplateParam>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
+      <code><![CDATA[start]]></code>
+      <code><![CDATA[terminate]]></code>
     </PossiblyUnusedMethod>
   </file>
 </files>

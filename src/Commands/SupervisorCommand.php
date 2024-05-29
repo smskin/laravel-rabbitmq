@@ -14,7 +14,7 @@ class SupervisorCommand extends BaseCommand
 
     protected $description = 'Run RabbitMQ daemons supervisor';
 
-    public function __construct(private readonly ShardingController $shardingController)
+    public function __construct()
     {
         parent::__construct();
     }
@@ -25,12 +25,13 @@ class SupervisorCommand extends BaseCommand
         $this->start();
     }
 
+
     /**
      * @return Collection<IWorker>
      */
     protected function getWorkers(): Collection
     {
-        return $this->shardingController->getShards();
+        return app(ShardingController::class)->getShards();
     }
 
     private function getConfigResolver(): RabbitMqConfigurationResolver

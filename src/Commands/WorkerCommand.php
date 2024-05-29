@@ -14,7 +14,7 @@ class WorkerCommand extends BaseCommand
 
     protected $description = 'Run worker';
 
-    public function __construct(private readonly ShardingController $shardingController, private readonly Worker $worker)
+    public function __construct()
     {
         parent::__construct();
     }
@@ -24,9 +24,8 @@ class WorkerCommand extends BaseCommand
      */
     public function handle()
     {
-        $consumers = $this->shardingController->getConsumersForShard($this->argument('shardId'));
-
-        $this->worker->start($consumers);
+        $consumers = app(ShardingController::class)->getConsumersForShard($this->argument('shardId'));
+        app(Worker::class)->start($consumers);
     }
 
     public function getSubscribedSignals(): array
