@@ -4,6 +4,8 @@ namespace SMSkin\LaravelRabbitMq\Commands;
 
 use ErrorException;
 use Exception;
+use Illuminate\Support\Collection;
+use SMSkin\LaravelRabbitMq\Contracts\IConsumer;
 use SMSkin\LaravelRabbitMq\ShardingController;
 use SMSkin\LaravelRabbitMq\Worker;
 use SMSkin\LaravelSupervisor\Commands\WorkerCommand as BaseCommand;
@@ -13,6 +15,8 @@ class WorkerCommand extends BaseCommand
     protected $signature = 'rmq:worker {shardId}';
 
     protected $description = 'Run worker';
+
+    private Worker $worker;
 
     public function __construct()
     {
@@ -24,8 +28,9 @@ class WorkerCommand extends BaseCommand
      */
     public function handle()
     {
-        $consumers = app(ShardingController::class)->getConsumersForShard($this->argument('shardId'));
-        app(Worker::class)->start($consumers);
+        $consumers = $this->getConsumersForShard();
+        $this->worker = $this->getWorker();
+        $this->worker->start($consumers);
     }
 
     public function getSubscribedSignals(): array
@@ -56,5 +61,18 @@ class WorkerCommand extends BaseCommand
     private function logInfo(string $message)
     {
         $this->info('Worker ' . $this->argument('shardId') . ': ' . $message);
+    }
+
+    /**
+     * @return Collection<IConsumer>
+     */
+    private function getConsumersForShard(): Collection
+    {
+        return app(ShardingController::class)->getConsumersForShard($this->argument('shardId'));
+    }
+
+    private function getWorker(): Worker
+    {
+        return app(Worker::class);
     }
 }
