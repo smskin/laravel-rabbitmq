@@ -10,7 +10,7 @@ class Consumer2 extends Consumer
 {
     public function getQueue(): string
     {
-        return (new Queue2)->getName();
+        return (new Queue2())->getName();
     }
 
     public function handleMessage(AMQPMessage $message): void

@@ -6,5 +6,4 @@ use SMSkin\LaravelRabbitMq\Entities\Queue;
 
 class Queue1 extends Queue
 {
-
 }
