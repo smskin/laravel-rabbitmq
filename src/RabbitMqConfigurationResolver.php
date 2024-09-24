@@ -2,6 +2,7 @@
 
 namespace SMSkin\LaravelRabbitMq;
 
+use Exception;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use SMSkin\LaravelRabbitMq\Contracts\IBinding;
 use SMSkin\LaravelRabbitMq\Contracts\IConfiguration;
@@ -15,6 +16,9 @@ class RabbitMqConfigurationResolver
     {
     }
 
+    /**
+     * @throws Exception
+     */
     public function declare(): void
     {
         $this->declareExchanges();
@@ -22,6 +26,8 @@ class RabbitMqConfigurationResolver
         $this->declareErrorQueues();
         $this->declareExchangeBindings();
         $this->declareQueueBindings();
+
+        $this->connection->close();
     }
 
     private function declareExchanges(): void

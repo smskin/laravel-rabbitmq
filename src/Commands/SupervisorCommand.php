@@ -2,6 +2,7 @@
 
 namespace SMSkin\LaravelRabbitMq\Commands;
 
+use Exception;
 use Illuminate\Support\Collection;
 use SMSkin\LaravelRabbitMq\Contracts\IShardingController;
 use SMSkin\LaravelRabbitMq\RabbitMqConfigurationResolver;
@@ -19,6 +20,9 @@ class SupervisorCommand extends BaseCommand
         parent::__construct();
     }
 
+    /**
+     * @throws Exception
+     */
     public function handle()
     {
         $this->getConfigResolver()->declare();
