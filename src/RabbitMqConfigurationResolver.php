@@ -16,6 +16,11 @@ class RabbitMqConfigurationResolver
     {
     }
 
+    public function getConnection(): AMQPStreamConnection
+    {
+        return $this->connection;
+    }
+
     /**
      * @throws Exception
      */
@@ -26,8 +31,6 @@ class RabbitMqConfigurationResolver
         $this->declareErrorQueues();
         $this->declareExchangeBindings();
         $this->declareQueueBindings();
-
-        $this->connection->close();
     }
 
     private function declareExchanges(): void

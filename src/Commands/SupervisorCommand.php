@@ -25,7 +25,10 @@ class SupervisorCommand extends BaseCommand
      */
     public function handle()
     {
-        $this->getConfigResolver()->declare();
+        $configuration = $this->getConfigResolver();
+        $configuration->declare();
+//        $configuration->getConnection()->close();
+
         $this->start();
     }
 
