@@ -18,5 +18,7 @@ class Consumer1 extends Consumer
         echo "\n--------\n";
         echo static::class . ': ' . $message->body;
         echo "\n--------\n";
+
+        $message->ack();
     }
 }
