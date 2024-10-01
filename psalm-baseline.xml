@@ -210,6 +210,7 @@
     </MissingTemplateParam>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
+      <code><![CDATA[getConnection]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Sharding/EveryConsumerStrategy.php">
