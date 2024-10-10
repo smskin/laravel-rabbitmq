@@ -79,7 +79,7 @@ class RabbitMqConfigurationResolver
         $name = $queue->getName() . '_error';
 
         $channel->exchange_declare($name, ExchangeType::DIRECT->value);
-        $channel->queue_declare($name);
+        $channel->queue_declare($name, false, true, false, false, false, []);
         $channel->queue_bind($name, $name);
     }
 

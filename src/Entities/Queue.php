@@ -11,7 +11,7 @@ abstract class Queue implements IQueue
 
     protected string $name;
     protected bool $passive = false;
-    protected bool $durable = false;
+    protected bool $durable = true;
     protected bool $exclusive = false;
     protected bool $autoDelete = false;
     protected bool $noWait = false;
