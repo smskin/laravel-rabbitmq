@@ -158,7 +158,7 @@ class Worker
         return app(Publisher::class);
     }
 
-    private function log(string $message, array|null $data = null): void
+    private function log(string $message, array $data = []): void
     {
         Log::debug(get_class($this) . ':' . $message, $data);
     }
