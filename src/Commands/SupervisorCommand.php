@@ -27,7 +27,7 @@ class SupervisorCommand extends BaseCommand
     {
         $configuration = $this->getConfigResolver();
         $configuration->declare();
-        //        $configuration->getConnection()->close();
+        $configuration->getConnection()->close();
 
         $this->start();
     }

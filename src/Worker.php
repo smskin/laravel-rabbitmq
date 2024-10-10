@@ -5,6 +5,7 @@ namespace SMSkin\LaravelRabbitMq;
 use ErrorException;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use LogicException;
 use PhpAmqpLib\Channel\AMQPChannel;
@@ -30,7 +31,7 @@ class Worker
     /**
      * @param AMQPStreamConnection $connection
      */
-    public function __construct(AMQPStreamConnection $connection)
+    public function __construct(private readonly AMQPStreamConnection $connection)
     {
         $this->channel = $connection->channel();
     }
@@ -47,6 +48,7 @@ class Worker
             return $this->registerConsumer($consumer);
         });
 
+        $this->log('Worker started');
         $this->channel->consume();
     }
 
@@ -55,11 +57,14 @@ class Worker
      */
     public function terminate(): void
     {
+        $this->log('Worker terminating');
         $this->working = false;
         sleep(1);
         $this->consumers->each(function (IConsumer $consumer) {
             $this->stopConsumer($consumer);
         });
+        $this->connection->close();
+        $this->log('Worker terminated');
     }
 
     private function stopConsumer(IConsumer $consumer): void
@@ -77,9 +82,15 @@ class Worker
             $consumer->isExclusive(),
             $consumer->isNoWait(),
             function (AMQPMessage $message) use ($consumer) {
+                $this->log('Handled message', ['body' => $message->body]);
                 try {
                     $consumer->handleMessage($message);
+                    $this->log('Consumer executed');
                 } catch (Throwable $exception) {
+                    $this->log('Consumer exception', [
+                        'class' => get_class($exception),
+                        'message' => $exception->getMessage(),
+                    ]);
                     $this->handleException($consumer, $message, $exception);
                 }
 
@@ -145,5 +156,10 @@ class Worker
     private function getPublisher(): Publisher
     {
         return app(Publisher::class);
+    }
+
+    private function log(string $message, array|null $data = null): void
+    {
+        Log::debug(get_class($this) . ':' . $message, $data);
     }
 }
