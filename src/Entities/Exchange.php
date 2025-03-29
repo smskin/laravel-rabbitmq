@@ -13,7 +13,7 @@ abstract class Exchange implements IExchange
     protected string $name;
     protected ExchangeType $type = ExchangeType::FANOUT;
     protected bool $passive = false;
-    protected bool $durable = false;
+    protected bool $durable = true;
     protected bool $autoDelete = false;
     protected bool $internal = false;
     protected bool $noWait = false;
